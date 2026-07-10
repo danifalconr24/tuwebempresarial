@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TuWebEmpresarial | Presentación para clientes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --brand: #2d6934;
+    --brand-dark: #234f27;
+    --secondary: #425b87;
+    --border: #e2e8f0;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: #0b1220;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
+
+  /* Deck */
+  .deck { position: relative; }
+  .slide {
+    display: none;
+    min-height: 100vh;
+    padding: 4rem 2rem 6rem;
+    background: var(--bg);
+    animation: fade 0.35s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .slide-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    align-self: center;
+  }
+  .slide.alt { background: var(--bg-alt); }
+
+  .eyebrow {
+    display: inline-block;
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .logo-mark { color: var(--brand); }
+  h2.title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 0.75rem; }
+  .subtitle { color: var(--muted); font-size: 1.15rem; max-width: 680px; margin-bottom: 2.5rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.85rem 1.6rem; border-radius: var(--radius);
+    font-weight: 600; font-size: 1rem; cursor: pointer; border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 20px rgba(45,105,52,0.25); }
+  .btn-primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
+
+  /* Grid cards */
+  .grid { display: grid; gap: 1.25rem; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.75rem;
+  }
+  .slide.alt .card { background: #fff; }
+  .card .icon { font-size: 1.9rem; display: block; margin-bottom: 0.75rem; }
+  .card h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .card p { color: var(--muted); font-size: 0.98rem; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .step-n { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; margin-bottom: 0.5rem; }
+  .step h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+  .step p { color: var(--muted); font-size: 0.95rem; }
+
+  /* Support list */
+  .check-list { list-style: none; display: grid; gap: 0.9rem; margin-top: 1rem; }
+  .check-list li { position: relative; padding-left: 1.75rem; font-size: 1.02rem; }
+  .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--brand); font-weight: 700; }
+
+  /* Delivery timeline */
+  .timeline { display: grid; gap: 1rem; margin-top: 1rem; }
+  .tl-row {
+    display: grid; grid-template-columns: 160px 1fr; gap: 1.25rem; align-items: center;
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.5rem;
+  }
+  .tl-time { font-weight: 800; color: var(--brand); font-size: 1.1rem; }
+  .tl-row p { color: var(--muted); }
+  .tl-row strong { color: var(--ink); }
+
+  /* Pricing */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
+  .plan {
+    position: relative; background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 2rem; display: flex; flex-direction: column;
+  }
+  .plan-highlight { border-color: var(--brand); box-shadow: 0 12px 30px rgba(45,105,52,0.15); }
+  .badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--brand); color: #fff; font-size: 0.78rem; font-weight: 700;
+    padding: 0.3rem 0.9rem; border-radius: 999px;
+  }
+  .plan h3 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .plan .tagline { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.25rem; min-height: 2.2em; }
+  .price { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .amount { font-size: 2.2rem; font-weight: 800; }
+  .period { color: var(--muted); font-size: 0.9rem; }
+  .features { list-style: none; display: grid; gap: 0.65rem; margin-bottom: 0; flex: 1; }
+  .features li { position: relative; padding-left: 1.5rem; font-size: 0.95rem; }
+  .features li::before { content: "✓"; position: absolute; left: 0; color: var(--brand); font-weight: 700; }
+  .pricing-note {
+    text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 2rem;
+    background: #fff; border: 1px dashed var(--brand); border-radius: var(--radius); padding: 1rem 1.5rem;
+  }
+  .pricing-note strong { color: var(--brand-dark); }
+
+  /* Mockups */
+  .mockup-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .mock-caption { color: var(--muted); font-size: 0.95rem; margin-top: 0.75rem; }
+  .browser {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.12); background: #fff;
+  }
+  .browser-bar { background: var(--bg-alt); border-bottom: 1px solid var(--border); padding: 0.55rem 0.85rem; display: flex; gap: 0.4rem; align-items: center; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .browser-url { margin-left: 0.75rem; font-size: 0.72rem; color: var(--muted); background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 0.15rem 0.6rem; }
+
+  /* Restaurant menu mock */
+  .rest-hero { padding: 1.5rem; background: radial-gradient(600px 200px at 80% -20%, rgba(45,105,52,0.15), transparent), #fff; }
+  .rest-hero .brand-name { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em; }
+  .rest-hero .brand-sub { color: var(--muted); font-size: 0.82rem; }
+  .menu-cat { padding: 0 1.5rem 1.25rem; }
+  .menu-cat h4 { color: var(--brand); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 1rem 0 0.6rem; }
+  .menu-item { display: flex; align-items: center; justify-content: space-between; gap: 0.85rem; padding: 0.5rem 0; border-bottom: 1px dashed var(--border); }
+  .menu-item .mi-info { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
+  .menu-item .mi-text { min-width: 0; }
+  .menu-item .mi-name { font-weight: 600; font-size: 0.9rem; }
+  .menu-item .mi-desc { color: var(--muted); font-size: 0.75rem; }
+  .menu-item .mi-price { font-weight: 800; color: var(--brand-dark); font-size: 0.9rem; white-space: nowrap; }
+  .dish-thumb { width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0; background-size: cover; background-position: center; box-shadow: 0 3px 8px rgba(15,23,42,0.15); }
+  /* Food hero banner (SVG gradient, standalone) */
+  .rest-banner { height: 130px; background-size: cover; background-position: center; position: relative; }
+  .rest-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.55)); }
+  .rest-banner .banner-tag { position: absolute; left: 1rem; bottom: 0.7rem; z-index: 1; color: #fff; font-weight: 700; font-size: 0.9rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .food-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 0 1.5rem 0.5rem; }
+  .food-gallery div { height: 68px; border-radius: 8px; background-size: cover; background-position: center; }
+  .rest-cta { margin: 0.5rem 1.5rem 1.5rem; }
+  .mini-btn { display:inline-block; background: var(--brand); color:#fff; font-size:0.8rem; font-weight:700; padding:0.5rem 1rem; border-radius:10px; }
+
+  /* Barber landing mock */
+  .barber-hero {
+    padding: 2rem 1.5rem; color: #fff;
+    background: linear-gradient(160deg, #234f27, #0f172a);
+  }
+  .barber-hero .eyebrow { color: #9fe6a8; }
+  .barber-hero h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .barber-hero p { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-bottom: 1rem; }
+  .barber-body { padding: 1.25rem 1.5rem; }
+  .barber-body h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand); margin-bottom: 0.6rem; }
+  .svc-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px dashed var(--border); font-size: 0.9rem; }
+  .svc-row strong { color: var(--brand-dark); }
+  .hours { color: var(--muted); font-size: 0.82rem; margin-top: 0.75rem; }
+  /* Barber location + contact */
+  .barber-map { height: 120px; background-size: cover; background-position: center; position: relative; border-top: 1px solid var(--border); }
+  .barber-map .pin { position: absolute; top: 42%; left: 50%; transform: translate(-50%,-100%); font-size: 1.6rem; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35)); }
+  .barber-contact { padding: 1.1rem 1.5rem 1.4rem; }
+  .barber-contact h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand); margin-bottom: 0.6rem; }
+  .contact-row { display: flex; align-items: center; gap: 0.55rem; font-size: 0.85rem; padding: 0.22rem 0; }
+  .contact-row .ci { width: 18px; text-align: center; }
+  .contact-row a { color: var(--ink); font-weight: 600; }
+  .social-row { display: flex; gap: 0.5rem; margin-top: 0.7rem; }
+  .social-row span { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: var(--brand); color: #fff; font-size: 0.85rem; font-weight: 700; }
+
+  /* Nav controls */
+  .controls {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    padding: 0.85rem; background: rgba(11,18,32,0.9); backdrop-filter: blur(8px);
+    color: #fff;
+  }
+  .controls button {
+    background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 0.5rem 0.9rem; font-size: 0.9rem; cursor: pointer; font-family: inherit; font-weight: 600;
+  }
+  .controls button:hover { background: var(--brand); border-color: var(--brand); }
+  .counter { font-size: 0.85rem; color: rgba(255,255,255,0.75); min-width: 60px; text-align: center; }
+  .print-btn { margin-left: 0.5rem; }
+
+  .footnote { color: var(--muted); font-size: 0.85rem; margin-top: 2rem; }
+  .lead-big { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800; margin-bottom: 1.25rem; }
+  .cover { text-align: center; }
+  .cover .trust { list-style: none; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; color: var(--muted); }
+  .cover .trust strong { color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .grid-3, .plans, .steps { grid-template-columns: 1fr; }
+    .grid-2, .mockup-wrap { grid-template-columns: 1fr; }
+    .tl-row { grid-template-columns: 100px 1fr; }
+  }
+
+  /* Print: one slide per page, all visible */
+  @media print {
+    body { background: #fff; }
+    .controls { display: none !important; }
+    .slide { display: flex !important; page-break-after: always; min-height: auto; padding: 2rem; }
+    .browser { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 1. Portada -->
+  <section class="slide active cover">
+    <div class="slide-inner">
+      <p class="eyebrow">Propuesta para tu negocio</p>
+      <h1 class="lead-big"><span class="logo-mark">Tu</span>WebEmpresarial</h1>
+      <p class="subtitle" style="margin: 0 auto 0;">Webs modernas, rápidas y a medida para restaurantes, barberías, tiendas y pequeños negocios. Sin plantillas genéricas.</p>
+      <ul class="trust">
+        <li><strong>100%</strong> responsive</li>
+        <li><strong>SEO</strong> incluido</li>
+        <li><strong>Carga</strong> ultrarrápida</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Qué hacemos -->
+  <section class="slide">
+    <div class="slide-inner">
+      <p class="eyebrow">Qué hacemos</p>
+      <h2 class="title">Webs hechas para tu tipo de negocio</h2>
+      <p class="subtitle">Cada sector tiene necesidades distintas. Diseñamos según las tuyas.</p>
+      <div class="grid grid-3">
+        <article class="card"><span class="icon">🍽️</span><h3>Restaurantes</h3><p>Cartas digitales, reservas y galería que abre el apetito. Listo para Google.</p></article>
+        <article class="card"><span class="icon">✂️</span><h3>Barberías y salones</h3><p>Web con reservas online y horarios claros para llenar tu agenda.</p></article>
+        <article class="card"><span class="icon">🛒</span><h3>Tiendas online</h3><p>Ecommerce pequeño y ágil para vender tus productos sin complicaciones.</p></article>
+        <article class="card"><span class="icon">🏪</span><h3>Pequeños negocios</h3><p>Presencia profesional que genera confianza y atrae nuevos clientes.</p></article>
+        <article class="card"><span class="icon">🔍</span><h3>SEO local</h3><p>Aparece cuando tus clientes te buscan en tu zona. Optimización incluida.</p></article>
+        <article class="card"><span class="icon">🎉</span><h3>Eventos y bodas</h3><p>Web de invitación con RSVP, galería y ubicación para tus invitados.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Cómo lo hacemos -->
+  <section class="slide alt">
+    <div class="slide-inner">
+      <p class="eyebrow">Cómo lo hacemos</p>
+      <h2 class="title">Un proceso simple y transparente</h2>
+      <p class="subtitle">De la idea a tu web publicada en pocos pasos.</p>
+      <div class="steps">
+        <div class="step"><span class="step-n">1</span><h3>Hablamos</h3><p>Nos cuentas tu negocio y qué necesitas.</p></div>
+        <div class="step"><span class="step-n">2</span><h3>Diseñamos</h3><p>Creamos una propuesta a medida, sin plantillas.</p></div>
+        <div class="step"><span class="step-n">3</span><h3>Desarrollamos</h3><p>Construimos una web rápida y optimizada.</p></div>
+        <div class="step"><span class="step-n">4</span><h3>Lanzamos</h3><p>Publicamos y te enseñamos a gestionarla.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Soporte -->
+  <section class="slide">
+    <div class="slide-inner">
+      <p class="eyebrow">Soporte que te damos</p>
+      <h2 class="title">No te dejamos solo tras el lanzamiento</h2>
+      <p class="subtitle">Acompañamiento real para que tu web siga funcionando perfecta.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Incluido con tu proyecto</h3>
+          <ul class="check-list">
+            <li>Formación para que gestiones tu web tú mismo</li>
+            <li>Corrección de errores tras la entrega</li>
+            <li>Web optimizada y lista para Google</li>
+            <li>Soporte por email durante el periodo acordado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mantenimiento opcional</h3>
+          <ul class="check-list">
+            <li>Actualizaciones de contenido y precios</li>
+            <li>Copias de seguridad y seguridad</li>
+            <li>Cambios de diseño y nuevas secciones</li>
+            <li>Soporte prioritario continuo</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footnote">El plan de soporte se define según el proyecto y tus necesidades.</p>
+    </div>
+  </section>
+
+  <!-- 5. Tiempos de entrega -->
+  <section class="slide alt">
+    <div class="slide-inner">
+      <p class="eyebrow">Tiempos de entrega</p>
+      <h2 class="title">Plazos claros desde el primer día</h2>
+      <p class="subtitle">Tiempos orientativos según el tipo de proyecto.</p>
+      <div class="timeline">
+        <div class="tl-row"><span class="tl-time">5 días</span><p><strong>Landing page</strong> — una sola página para darte de alta en internet.</p></div>
+        <div class="tl-row"><span class="tl-time">10 días</span><p><strong>Web profesional</strong> — hasta 5 páginas con diseño a medida.</p></div>
+        <div class="tl-row"><span class="tl-time">15 días</span><p><strong>Tienda online</strong> — ecommerce completo con pasarela de pago.</p></div>
+      </div>
+      <p class="footnote">Los plazos empiezan a contar cuando recibimos tus textos e imágenes. Se confirman en el presupuesto final.</p>
+    </div>
+  </section>
+
+  <!-- 6. Precios -->
+  <section class="slide">
+    <div class="slide-inner">
+      <p class="eyebrow">Opciones de precio</p>
+      <h2 class="title">Precios claros, sin sorpresas</h2>
+      <p class="subtitle">Ejemplo de planes — ajustamos el presupuesto final según tu proyecto.</p>
+      <div class="plans">
+        <article class="plan">
+          <h3>Básico</h3>
+          <p class="tagline">Ideal para darte de alta en internet.</p>
+          <div class="price"><span class="amount">299€</span><span class="period">pago único</span></div>
+          <ul class="features">
+            <li>Landing page de 1 sola página</li>
+            <li>Diseño responsive</li>
+            <li>Formulario de contacto</li>
+            <li>SEO básico incluido</li>
+            <li>Entrega en 5 días</li>
+          </ul>
+        </article>
+        <article class="plan plan-highlight">
+          <span class="badge">Más popular</span>
+          <h3>Profesional</h3>
+          <p class="tagline">El más elegido por pequeños negocios.</p>
+          <div class="price"><span class="amount">599€</span><span class="period">pago único</span></div>
+          <ul class="features">
+            <li>Hasta 5 páginas</li>
+            <li>Diseño a medida</li>
+            <li>Formulario de contacto avanzado</li>
+            <li>SEO on-page completo</li>
+            <li>Integración con redes sociales</li>
+            <li>Entrega en 10 días</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3>Ecommerce</h3>
+          <p class="tagline">Para vender tus productos online.</p>
+          <div class="price"><span class="amount">999€</span><span class="period">pago único</span></div>
+          <ul class="features">
+            <li>Tienda online completa</li>
+            <li>Pasarela de pago</li>
+            <li>Gestión de productos e inventario</li>
+            <li>SEO avanzado</li>
+            <li>Soporte 30 días</li>
+            <li>Entrega en 15 días</li>
+          </ul>
+        </article>
+      </div>
+      <p class="pricing-note">* Precios orientativos. <strong>El precio final se acuerda contigo</strong> según el alcance y las funcionalidades reales de tu proyecto, tras nuestra primera conversación.</p>
+    </div>
+  </section>
+
+  <!-- 7. Ejemplo restaurante -->
+  <section class="slide alt">
+    <div class="slide-inner">
+      <p class="eyebrow">Ejemplo de diseño</p>
+      <h2 class="title">Carta digital para restaurante</h2>
+      <p class="subtitle">Diseño real de ejemplo — se adapta a tus platos, colores y fotos.</p>
+      <div class="mockup-wrap">
+        <div>
+          <div class="browser">
+            <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="browser-url">labuenamesa.es/carta</span></div>
+            <div class="rest-banner" data-food="banner"><span class="banner-tag">Cocina mediterránea de temporada</span></div>
+            <div class="rest-hero">
+              <div class="brand-name">La Buena Mesa</div>
+              <div class="brand-sub">Cocina mediterránea · Reservas online</div>
+            </div>
+            <div class="food-gallery">
+              <div data-food="paella"></div>
+              <div data-food="burrata"></div>
+              <div data-food="steak"></div>
+            </div>
+            <div class="menu-cat">
+              <h4>Entrantes</h4>
+              <div class="menu-item"><div class="mi-info"><span class="dish-thumb" data-food="croquetas"></span><div class="mi-text"><div class="mi-name">Croquetas caseras</div><div class="mi-desc">De jamón ibérico, 6 uds.</div></div></div><div class="mi-price">8,50€</div></div>
+              <div class="menu-item"><div class="mi-info"><span class="dish-thumb" data-food="burrata"></span><div class="mi-text"><div class="mi-name">Burrata fresca</div><div class="mi-desc">Con tomate seco y albahaca</div></div></div><div class="mi-price">11,00€</div></div>
+              <h4>Principales</h4>
+              <div class="menu-item"><div class="mi-info"><span class="dish-thumb" data-food="paella"></span><div class="mi-text"><div class="mi-name">Arroz meloso de marisco</div><div class="mi-desc">Para 2 personas</div></div></div><div class="mi-price">24,00€</div></div>
+              <div class="menu-item"><div class="mi-info"><span class="dish-thumb" data-food="steak"></span><div class="mi-text"><div class="mi-name">Solomillo a la brasa</div><div class="mi-desc">Con patatas confitadas</div></div></div><div class="mi-price">19,50€</div></div>
+            </div>
+            <div class="rest-cta"><span class="mini-btn">Reservar mesa</span></div>
+          </div>
+          <p class="mock-caption">Carta actualizable, botón de reservas y ficha lista para Google Maps.</p>
+        </div>
+        <div class="card">
+          <h3>Qué incluye este diseño</h3>
+          <ul class="check-list">
+            <li>Carta por categorías, fácil de actualizar</li>
+            <li>Botón de reservas o pedido</li>
+            <li>Galería de platos que abre el apetito</li>
+            <li>Optimizado para móvil (donde se consulta la carta)</li>
+            <li>Ficha y horarios listos para Google</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Ejemplo barbería -->
+  <section class="slide">
+    <div class="slide-inner">
+      <p class="eyebrow">Ejemplo de diseño</p>
+      <h2 class="title">Landing page para barbería</h2>
+      <p class="subtitle">Diseño real de ejemplo — pensado para llenar tu agenda.</p>
+      <div class="mockup-wrap">
+        <div>
+          <div class="browser">
+            <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="browser-url">barberiaelnorte.es</span></div>
+            <div class="barber-hero">
+              <p class="eyebrow">Barbería El Norte</p>
+              <h3>Tu mejor corte, sin esperas</h3>
+              <p>Reserva online en 30 segundos. Barberos expertos en el centro de la ciudad.</p>
+              <span class="mini-btn">Reservar cita</span>
+            </div>
+            <div class="barber-body">
+              <h4>Servicios</h4>
+              <div class="svc-row"><span>Corte de pelo</span><strong>14€</strong></div>
+              <div class="svc-row"><span>Corte + barba</span><strong>20€</strong></div>
+              <div class="svc-row"><span>Arreglo de barba</span><strong>10€</strong></div>
+              <div class="svc-row"><span>Corte infantil</span><strong>11€</strong></div>
+              <p class="hours">Lun–Sáb · 10:00–20:00 · Cita previa recomendada</p>
+            </div>
+            <div class="barber-map" data-food="map"><span class="pin">📍</span></div>
+            <div class="barber-contact">
+              <h4>Dónde estamos</h4>
+              <div class="contact-row"><span class="ci">📍</span><span>Calle Mayor 24, 28013 Madrid</span></div>
+              <div class="contact-row"><span class="ci">🚇</span><span>Metro Sol · Parking a 50 m</span></div>
+              <h4 style="margin-top:1rem;">Contacto</h4>
+              <div class="contact-row"><span class="ci">📞</span><a href="tel:+34911234567">911 234 567</a></div>
+              <div class="contact-row"><span class="ci">✉️</span><a href="mailto:hola@barberiaelnorte.es">hola@barberiaelnorte.es</a></div>
+              <div class="social-row"><span>IG</span><span>FB</span><span>TT</span></div>
+            </div>
+          </div>
+          <p class="mock-caption">Reservas online, servicios con precios, mapa de ubicación y contacto directo.</p>
+        </div>
+        <div class="card">
+          <h3>Qué incluye este diseño</h3>
+          <ul class="check-list">
+            <li>Botón de reserva online destacado</li>
+            <li>Lista de servicios y precios visible</li>
+            <li>Horarios y ubicación claros</li>
+            <li>Galería de cortes y valoraciones de clientes</li>
+            <li>SEO local para aparecer en tu zona</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Cierre / contacto -->
+  <section class="slide alt cover">
+    <div class="slide-inner">
+      <p class="eyebrow">Siguiente paso</p>
+      <h2 class="title">¿Hablamos de tu proyecto?</h2>
+      <p class="subtitle" style="margin: 0 auto 2rem;">Te preparamos un presupuesto cerrado y sin compromiso. El precio final lo acordamos juntos.</p>
+      <a href="mailto:hola@tuwebempresarial.com" class="btn btn-primary">Pide tu presupuesto gratis</a>
+      <p class="footnote"><span class="logo-mark">Tu</span>WebEmpresarial · Diseño y desarrollo web para pequeñas empresas.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="controls">
+  <button id="prev">← Anterior</button>
+  <span class="counter" id="counter">1 / 9</span>
+  <button id="next">Siguiente →</button>
+  <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+</div>
+
+<script>
+  // Standalone SVG "food photos" (no external files) applied as backgrounds
+  const foodSVG = {
+    banner: `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='130'>
+      <defs><radialGradient id='b' cx='30%' cy='25%' r='90%'>
+        <stop offset='0%' stop-color='#f7d9a0'/><stop offset='55%' stop-color='#c8873f'/><stop offset='100%' stop-color='#5c3a1e'/></radialGradient></defs>
+      <rect width='400' height='130' fill='url(#b)'/>
+      <ellipse cx='150' cy='75' rx='120' ry='60' fill='#f4ede0' opacity='.95'/>
+      <ellipse cx='150' cy='72' rx='95' ry='46' fill='#e2c48a'/>
+      <circle cx='120' cy='68' r='16' fill='#c0392b'/><circle cx='170' cy='80' r='14' fill='#e07b39'/>
+      <circle cx='150' cy='58' r='10' fill='#7cb342'/><circle cx='185' cy='62' r='9' fill='#c0392b'/>
+      <path d='M95 70q30-22 60 0' stroke='#8d6e2f' stroke-width='5' fill='none' opacity='.5'/>
+      <circle cx='320' cy='45' r='34' fill='#f4ede0'/><circle cx='320' cy='45' r='24' fill='#d94f36'/><circle cx='320' cy='45' r='11' fill='#f2c744'/></svg>`,
+    croquetas: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>
+      <rect width='60' height='60' fill='#efe7d8'/><ellipse cx='30' cy='34' rx='26' ry='20' fill='#e3d3b0'/>
+      <rect x='12' y='24' width='16' height='11' rx='5' fill='#c8873f'/><rect x='28' y='30' width='16' height='11' rx='5' fill='#b5702c'/>
+      <rect x='20' y='36' width='16' height='11' rx='5' fill='#d99a4e'/><path d='M14 20q4-6 10-2' stroke='#7cb342' stroke-width='2' fill='none'/></svg>`,
+    burrata: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>
+      <rect width='60' height='60' fill='#eef3ea'/><circle cx='30' cy='32' r='16' fill='#fbfbf6'/><circle cx='30' cy='32' r='16' fill='#fff' opacity='.6'/>
+      <circle cx='16' cy='40' r='6' fill='#d94f36'/><circle cx='44' cy='24' r='6' fill='#d94f36'/><circle cx='42' cy='42' r='5' fill='#c0392b'/>
+      <path d='M20 18q6 4 2 10' stroke='#3f7d3f' stroke-width='2.5' fill='none'/></svg>`,
+    paella: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>
+      <rect width='60' height='60' fill='#efe7d8'/><circle cx='30' cy='32' r='22' fill='#2b2b2b'/><circle cx='30' cy='32' r='18' fill='#e0b34e'/>
+      <circle cx='22' cy='28' r='4' fill='#d94f36'/><circle cx='38' cy='34' r='4' fill='#d94f36'/><circle cx='30' cy='40' r='3.5' fill='#c0392b'/>
+      <circle cx='36' cy='24' r='3' fill='#7cb342'/><circle cx='24' cy='38' r='3' fill='#e8e2d0'/><circle cx='42' cy='30' r='3' fill='#e8e2d0'/></svg>`,
+    steak: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'>
+      <rect width='60' height='60' fill='#efe7d8'/><ellipse cx='30' cy='34' rx='24' ry='18' fill='#f4ede0'/>
+      <ellipse cx='27' cy='32' rx='15' ry='11' fill='#6b3320'/><ellipse cx='27' cy='32' rx='9' ry='6' fill='#8a4a30'/>
+      <path d='M18 28l18 8M20 34l16-8' stroke='#3a1c12' stroke-width='2' opacity='.5'/>
+      <circle cx='44' cy='42' r='4' fill='#e0b34e'/><circle cx='48' cy='36' r='3.5' fill='#e0b34e'/></svg>`,
+    map: `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='120'>
+      <rect width='400' height='120' fill='#e8ede4'/>
+      <rect x='0' y='0' width='400' height='120' fill='#dde7d6'/>
+      <path d='M0 40 H400 M0 82 H400 M70 0 V120 M180 0 V120 M300 0 V120' stroke='#c3d0bb' stroke-width='6' fill='none'/>
+      <path d='M0 60 L400 30' stroke='#f0d98a' stroke-width='9' fill='none'/>
+      <rect x='24' y='8' width='38' height='26' fill='#cdd8c4'/><rect x='84' y='8' width='84' height='26' fill='#cdd8c4'/>
+      <rect x='196' y='46' width='90' height='30' fill='#cdd8c4'/><rect x='316' y='46' width='70' height='30' fill='#cdd8c4'/>
+      <rect x='24' y='90' width='40' height='24' fill='#cdd8c4'/><rect x='196' y='90' width='90' height='24' fill='#cdd8c4'/>
+      <path d='M12 118 Q60 70 120 96 T400 66' stroke='#a9c3e0' stroke-width='7' fill='none' opacity='.6'/></svg>`
+  };
+  function enc(s){ return 'url("data:image/svg+xml;utf8,' + encodeURIComponent(s.replace(/\s+/g,' ')) + '")'; }
+  document.querySelectorAll('[data-food]').forEach(el => {
+    const key = el.getAttribute('data-food');
+    if (foodSVG[key]) el.style.backgroundImage = enc(foodSVG[key]);
+  });
+</script>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    window.scrollTo({ top: 0 });
+  }
+  document.getElementById('next').onclick = () => show(i + 1);
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') show(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
+  });
+  show(0);
+</script>
+</body>
+</html>
