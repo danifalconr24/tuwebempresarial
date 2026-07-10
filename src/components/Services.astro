@@ -1,0 +1,186 @@
+---
+const services = [
+  {
+    icon: "🍽️",
+    title: "Restaurantes",
+    desc: "Cartas digitales, reservas y galería que abre el apetito. Listo para Google.",
+  },
+  {
+    icon: "✂️",
+    title: "Barberías y salones",
+    desc: "Web con reservas online y horarios claros para llenar tu agenda.",
+  },
+  {
+    icon: "🛒",
+    title: "Tiendas online",
+    desc: "Ecommerce pequeño y ágil para vender tus productos sin complicaciones.",
+  },
+  {
+    icon: "🏪",
+    title: "Pequeños negocios",
+    desc: "Presencia profesional que genera confianza y atrae nuevos clientes.",
+  },
+  {
+    icon: "🔍",
+    title: "SEO local",
+    desc: "Aparece cuando tus clientes te buscan en tu zona. Optimización incluida.",
+  },
+  {
+    icon: "🎉",
+    title: "Eventos y bodas",
+    desc: "Web de invitación con RSVP, galería y ubicación para que tus invitados confirmen fácilmente.",
+  },
+];
+
+const steps = [
+  { n: "1", t: "Hablamos", d: "Nos cuentas tu negocio y qué necesitas." },
+  { n: "2", t: "Diseñamos", d: "Creamos una propuesta a medida, sin plantillas." },
+  { n: "3", t: "Desarrollamos", d: "Construimos una web rápida y optimizada." },
+  { n: "4", t: "Lanzamos", d: "Publicamos y te enseñamos a gestionarla." },
+];
+---
+
+<section id="servicios" class="services">
+  <div class="container">
+    <div class="section-head">
+      <h2>Webs hechas para tu tipo de negocio</h2>
+      <p>Cada sector tiene necesidades distintas. Diseñamos según las tuyas.</p>
+    </div>
+    <div class="grid">
+      {
+        services.map((s) => (
+          <article class="card">
+            <span class="icon" aria-hidden="true">{s.icon}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="process">
+  <div class="container">
+    <div class="section-head">
+      <h2>Un proceso simple y transparente</h2>
+      <p>De la idea a tu web publicada en pocos pasos.</p>
+    </div>
+    <div class="steps">
+      {
+        steps.map((s) => (
+          <div class="step">
+            <span class="step-n">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 3rem;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-head p {
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    border-color: transparent;
+  }
+
+  .icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.85rem;
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card p {
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  .process {
+    background: var(--bg-alt);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .step {
+    padding: 1.5rem;
+  }
+
+  .step-n {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--brand);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .step h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

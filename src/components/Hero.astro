@@ -1,0 +1,84 @@
+---
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Diseño web para pequeñas empresas</p>
+    <h1>Tu negocio merece una web que venda</h1>
+    <p class="lead">
+      Creamos sitios web modernos, rápidos y optimizados para restaurantes,
+      barberías, tiendas online y pequeños negocios. Sin plantillas genéricas.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">Pide tu presupuesto gratis</a>
+      <a href="#servicios" class="btn btn-ghost">Ver servicios</a>
+    </div>
+    <ul class="trust">
+      <li><strong>100%</strong> responsive</li>
+      <li><strong>SEO</strong> incluido</li>
+      <li><strong>Carga</strong> ultrarrápida</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: radial-gradient(
+        1200px 500px at 70% -10%,
+        rgba(45, 105, 52, 0.12),
+        transparent
+      ),
+      var(--bg);
+    padding: 6rem 0 5rem;
+  }
+
+  .hero-inner {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.85rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .trust {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .trust strong {
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,237 @@
+---
+---
+
+<section id="contacto" class="contact">
+  <div class="container contact-inner">
+    <div class="contact-copy">
+      <h2>Cuéntanos tu proyecto</h2>
+      <p>
+        Déjanos tus datos y te contactamos en menos de 24 horas con un
+        presupuesto sin compromiso.
+      </p>
+      <ul class="contact-points">
+        <li>Presupuesto gratis y sin compromiso</li>
+        <li>Respuesta en menos de 24 h</li>
+        <li>Trato directo, sin intermediarios</li>
+      </ul>
+    </div>
+
+    <form id="contact-form" class="form" novalidate>
+      <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_KEY} />
+      <input type="hidden" name="subject" value="Nuevo lead desde TuWebEmpresarial" />
+      <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" />
+
+      <div class="field">
+        <label for="fullName">Nombre completo</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          autocomplete="name"
+          placeholder="Ana García"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          autocomplete="email"
+          placeholder="ana@negocio.com"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="phone">Teléfono</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          autocomplete="tel"
+          inputmode="tel"
+          placeholder="600 123 456"
+          pattern="[0-9\s+()-]{6,}"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary form-submit">
+        Enviar y pedir presupuesto
+      </button>
+
+      <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--secondary);
+    color: #fff;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .contact-copy h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .contact-copy p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-points {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .contact-points li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: #e2e8f0;
+  }
+
+  .contact-points li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .form {
+    background: #fff;
+    color: var(--ink);
+    border-radius: 18px;
+    padding: 2rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .field label {
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .field input {
+    font: inherit;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-alt);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .field input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(45, 105, 52, 0.15);
+    background: #fff;
+  }
+
+  .field input:user-invalid {
+    border-color: #ef4444;
+  }
+
+  .form-submit {
+    margin-top: 0.25rem;
+  }
+
+  .form-status {
+    font-size: 0.95rem;
+    min-height: 1.2em;
+    margin: 0;
+  }
+
+  .form-status.ok {
+    color: #16a34a;
+  }
+
+  .form-status.err {
+    color: #ef4444;
+  }
+
+  .honeypot {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+  const submitBtn = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    status.className = "form-status";
+    status.textContent = "";
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      status.classList.add("err");
+      status.textContent = "Revisa los campos marcados.";
+      return;
+    }
+
+    const data = new FormData(form);
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+    }
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        status.classList.add("ok");
+        status.textContent = "¡Gracias! Te contactaremos en menos de 24 h.";
+        form.reset();
+      } else {
+        throw new Error(result.message || "Error al enviar");
+      }
+    } catch (err) {
+      status.classList.add("err");
+      status.textContent = "No se pudo enviar. Intenta de nuevo o escríbenos directamente.";
+      console.error("Web3Forms error:", err);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar y pedir presupuesto";
+      }
+    }
+  });
+</script>

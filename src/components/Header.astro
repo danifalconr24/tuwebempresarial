@@ -1,0 +1,84 @@
+---
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="TuWebEmpresarial inicio">
+      <img src="/logo-mark.svg" alt="" width="32" height="32" class="logo-img" />
+      <span><span class="logo-mark">Tu</span>WebEmpresarial</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#precios">Precios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#contacto" class="btn btn-primary nav-cta">Pide presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.03em;
+  }
+
+  .logo-img {
+    display: block;
+    border-radius: 8px;
+  }
+
+  .logo-mark {
+    color: var(--brand);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .nav a:not(.nav-cta) {
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+  }
+
+  .nav-cta {
+    color: #fff;
+    padding: 0.6rem 1.1rem;
+  }
+
+  .nav-cta:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .nav a:not(.nav-cta) {
+      display: none;
+    }
+  }
+</style>

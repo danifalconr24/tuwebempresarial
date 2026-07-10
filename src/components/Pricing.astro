@@ -1,0 +1,212 @@
+---
+const plans = [
+  {
+    name: "Básico",
+    price: "299€",
+    period: "pago único",
+    tagline: "Ideal para darte de alta en internet.",
+    features: [
+      "Landing page de 1 sola página",
+      "Diseño responsive",
+      "Formulario de contacto",
+      "SEO básico incluido",
+      "Entrega en 5 días",
+    ],
+    cta: "Empezar",
+    highlight: false,
+  },
+  {
+    name: "Profesional",
+    price: "599€",
+    period: "pago único",
+    tagline: "El más elegido por pequeños negocios.",
+    features: [
+      "Hasta 5 páginas",
+      "Diseño a medida",
+      "Formulario de contacto avanzado",
+      "SEO on-page completo",
+      "Integración con redes sociales",
+      "Entrega en 10 días",
+    ],
+    cta: "Elegir plan",
+    highlight: true,
+  },
+  {
+    name: "Ecommerce",
+    price: "999€",
+    period: "pago único",
+    tagline: "Para vender tus productos online.",
+    features: [
+      "Tienda online completa",
+      "Pasarela de pago",
+      "Gestión de productos e inventario",
+      "SEO avanzado",
+      "Soporte 30 días",
+      "Entrega en 15 días",
+    ],
+    cta: "Solicitar info",
+    highlight: false,
+  },
+];
+---
+
+<section id="precios" class="pricing">
+  <div class="container">
+    <div class="section-head">
+      <h2>Precios claros, sin sorpresas</h2>
+      <p>
+        Ejemplo de planes — ajustamos el presupuesto final según tu proyecto.
+      </p>
+      </br>
+    </div>
+    <div class="plans">
+      {
+        plans.map((p) => (
+          <article class={`plan ${p.highlight ? "plan-highlight" : ""}`}>
+            {p.highlight && <span class="badge">Más popular</span>}
+            <h3>{p.name}</h3>
+            <p class="tagline">{p.tagline}</p>
+            <div class="price">
+              <span class="amount">{p.price}</span>
+              <span class="period">{p.period}</span>
+            </div>
+            <ul class="features">
+              {p.features.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+            <a
+              href="#contacto"
+              class={`btn ${p.highlight ? "btn-primary" : "btn-ghost"} plan-cta`}
+            >
+              {p.cta}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+    <p class="pricing-note">
+      * Precios orientativos. El presupuesto final se ajusta según alcance y
+      funcionalidades del proyecto.
+    </p>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    background: var(--bg-alt);
+  }
+
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .plan {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .plan:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  }
+
+  .plan-highlight {
+    border-color: var(--brand);
+    box-shadow: 0 12px 30px rgba(45, 105, 52, 0.15);
+  }
+
+  .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--brand);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .plan h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tagline {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 1.25rem;
+    min-height: 2.2em;
+  }
+
+  .price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .amount {
+    font-size: 2.2rem;
+    font-weight: 800;
+  }
+
+  .period {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .features {
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+    flex: 1;
+  }
+
+  .features li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .plan-cta {
+    width: 100%;
+  }
+
+  .pricing-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .plans {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+  }
+</style>
