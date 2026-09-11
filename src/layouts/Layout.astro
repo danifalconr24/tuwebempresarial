@@ -8,7 +8,7 @@ export interface Props {
 const {
   title = "TuWebEmpresarial | Diseño web para pequeñas empresas",
   description = "Creamos sitios web modernos y rápidos para pequeñas empresas, restaurantes, barberías y tiendas online. Diseño profesional que atrae clientes.",
-  image = "/og-image.jpg",
+  image = "/logo.svg",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -17,10 +17,13 @@ const socialImage = new URL(image, Astro.site);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${Astro.site}#organization`,
   name: "TuWebEmpresarial",
   description,
   url: Astro.site?.toString(),
   image: socialImage.toString(),
+  logo: new URL("/logo.svg", Astro.site).toString(),
+  inLanguage: "es",
   areaServed: "ES",
   serviceType: "Diseño y desarrollo web",
   priceRange: "$$",
@@ -37,7 +40,9 @@ const jsonLd = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="TuWebEmpresarial" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0f172a" />
 
@@ -47,6 +52,7 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="TuWebEmpresarial" />
 
@@ -55,6 +61,7 @@ const jsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={title} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
