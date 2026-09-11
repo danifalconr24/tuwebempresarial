@@ -21,7 +21,7 @@ jobs:
           cache: npm
 
       - name: Build site
-        run: npm ci && npm run build
+        run: npm ci && npm run build && cp presentacion.html dist/presentacion.html
         env:
           PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
 
