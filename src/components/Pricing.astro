@@ -10,7 +10,7 @@ const plans = [
       "Diseño responsive",
       "Formulario de contacto",
       "SEO básico incluido",
-      "Entrega en 5 días",
+      "Entrega en 2 días",
     ],
     cta: "Empezar",
     highlight: false,
@@ -26,13 +26,13 @@ const plans = [
       "Formulario de contacto avanzado",
       "SEO on-page completo",
       "Integración con redes sociales",
-      "Entrega en 10 días",
+      "Entrega en 5 días",
     ],
     cta: "Elegir plan",
     highlight: true,
   },
   {
-    name: "Ecommerce",
+    name: "Soluciones a medida",
     price: "999€",
     period: "pago único",
     tagline: "Para vender tus productos online.",
@@ -42,7 +42,7 @@ const plans = [
       "Gestión de productos e inventario",
       "SEO avanzado",
       "Soporte 30 días",
-      "Entrega en 15 días",
+      "Entrega en 10 días",
     ],
     cta: "Solicitar info",
     highlight: false,
@@ -67,7 +67,10 @@ const plans = [
             <h3>{p.name}</h3>
             <p class="tagline">{p.tagline}</p>
             <div class="price">
-              <span class="amount">{p.price}</span>
+              <div class="price-main">
+                <span class="price-label">desde</span>
+                <span class="amount">{p.price}</span>
+              </div>
               <span class="period">{p.period}</span>
             </div>
             <ul class="features">
@@ -153,9 +156,22 @@ const plans = [
 
   .price {
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     gap: 0.4rem;
     margin-bottom: 1.5rem;
+  }
+
+  .price-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-label {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.25rem;
   }
 
   .amount {
