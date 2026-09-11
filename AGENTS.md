@@ -20,6 +20,12 @@
 - Copy `.env.example` to `.env` and set `PUBLIC_WEB3FORMS_KEY` before testing the contact form. `src/components/Contact.astro` submits directly to Web3Forms from the browser.
 - Keep `.env` and `.env.production` out of version control; they are ignored.
 
+## Deployment
+
+- Manual GitHub Actions deployment: `.github/workflows/deploy.yml` builds the static site and updates `/opt/tuwebempresarial/site` on the VPS, then runs the existing Compose deployment.
+- Required GitHub Actions secrets: `PUBLIC_WEB3FORMS_KEY`, `VPS_HOST`, `VPS_USER`, and `VPS_SSH_PRIVATE_KEY`.
+- Current VPS deployment serves HTTP on port `8080`; existing services own ports `80` and `443`.
+
 ## Changes
 
 - Preserve Spanish user-facing copy and existing responsive layout conventions when editing the landing page.
