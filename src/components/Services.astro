@@ -42,17 +42,30 @@ const steps = [
 
 <section id="servicios" class="services">
   <div class="container">
-    <div class="section-head">
-      <h2>Webs hechas para tu tipo de negocio</h2>
-      <p>Cada sector tiene necesidades distintas. Diseñamos según las tuyas.</p>
+    <div class="section-topline">
+      <div class="section-head">
+        <span class="section-kicker">Lo que hacemos</span>
+        <h2>Webs hechas para tu tipo de negocio</h2>
+        <p>Cada sector tiene necesidades distintas. Diseñamos según las tuyas.</p>
+      </div>
+      <div class="section-note">
+        <span class="note-dot"></span>
+        <span>6 soluciones, una web a tu medida</span>
+      </div>
     </div>
     <div class="grid">
       {
-        services.map((s) => (
+        services.map((s, index) => (
           <article class="card">
-            <span class="icon" aria-hidden="true">{s.icon}</span>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
+            <div class="card-top">
+              <span class="icon" aria-hidden="true">{s.icon}</span>
+              <span class="card-number">{String(index + 1).padStart(2, "0")}</span>
+            </div>
+            <div class="card-content">
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
           </article>
         ))
       }
@@ -63,6 +76,7 @@ const steps = [
 <section id="proceso" class="process">
   <div class="container">
     <div class="section-head">
+      <span class="section-kicker">Cómo trabajamos</span>
       <h2>Un proceso simple y transparente</h2>
       <p>De la idea a tu web publicada en pocos pasos.</p>
     </div>
@@ -81,10 +95,53 @@ const steps = [
 </section>
 
 <style>
+  .services {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .services::before,
+  .services::after {
+    content: "";
+    position: absolute;
+    width: 22rem;
+    height: 22rem;
+    border: 1px solid rgba(223, 233, 215, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .services::before { top: -13rem; right: -7rem; }
+  .services::after { bottom: -17rem; left: -10rem; }
+
+  .services .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-topline {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
   .section-head {
-    text-align: center;
-    max-width: 620px;
-    margin: 0 auto 3rem;
+    max-width: 670px;
+    margin: 0;
+  }
+
+  .section-kicker {
+    display: block;
+    color: var(--brand);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
   }
 
   .section-head h2 {
@@ -98,30 +155,88 @@ const steps = [
     font-size: 1.1rem;
   }
 
+  .services .section-kicker { color: #b8d3a9; }
+  .services .section-head p { color: #b1b9ad; }
+
+  .section-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid rgba(223, 233, 215, 0.2);
+    border-radius: 999px;
+    color: #dfe9d7;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .note-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #a9ca91;
+    box-shadow: 0 0 0 4px rgba(169, 202, 145, 0.12);
+  }
+
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
   }
 
   .card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    position: relative;
+    min-height: 16rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(223, 233, 215, 0.14);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.045);
+    transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-    border-color: transparent;
+    transform: translateY(-6px);
+    border-color: rgba(184, 211, 169, 0.55);
+    background: rgba(73, 107, 67, 0.55);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 
   .icon {
-    font-size: 1.8rem;
-    display: block;
-    margin-bottom: 0.85rem;
+    display: grid;
+    width: 3.15rem;
+    height: 3.15rem;
+    place-items: center;
+    border: 1px solid rgba(223, 233, 215, 0.18);
+    border-radius: 0.8rem;
+    background: rgba(223, 233, 215, 0.08);
+    font-size: 1.45rem;
+    transition: transform 220ms ease, background 220ms ease;
+  }
+
+  .card:hover .icon {
+    transform: rotate(-8deg) scale(1.08);
+    background: rgba(223, 233, 215, 0.15);
+  }
+
+  .card-number {
+    color: #82937d;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .card-content {
+    margin-top: auto;
+    padding-top: 2.5rem;
   }
 
   .card h3 {
@@ -130,8 +245,25 @@ const steps = [
   }
 
   .card p {
-    color: var(--muted);
+    max-width: 32rem;
+    color: #adb8aa;
     font-size: 0.98rem;
+  }
+
+  .card-arrow {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.35rem;
+    color: #b8d3a9;
+    font-size: 1.35rem;
+    line-height: 1;
+    opacity: 0.65;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+
+  .card:hover .card-arrow {
+    transform: translate(3px, -3px);
+    opacity: 1;
   }
 
   .process {
@@ -168,14 +300,23 @@ const steps = [
 
   @media (max-width: 900px) {
     .grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
     .steps {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 560px) {
+    .section-topline {
+      display: block;
+    }
+
+    .section-note {
+      margin-top: 1.5rem;
+    }
+
     .grid {
       grid-template-columns: 1fr;
     }
@@ -183,4 +324,5 @@ const steps = [
       grid-template-columns: 1fr;
     }
   }
+
 </style>

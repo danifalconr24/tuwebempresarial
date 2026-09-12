@@ -6,12 +6,11 @@
     <div class="contact-copy">
       <h2>Cuéntanos tu proyecto</h2>
       <p>
-        Déjanos tus datos y te contactamos en menos de 24 horas con un
-        presupuesto sin compromiso.
+        Déjanos tus datos y te contactamos en menos de 24 horas.
       </p>
       <ul class="contact-points">
         <li>Presupuesto gratis y sin compromiso</li>
-        <li>Respuesta en menos de 24 h</li>
+        <li>Respuesta en menos de 24h</li>
         <li>Trato directo, sin intermediarios</li>
       </ul>
     </div>
@@ -70,7 +69,7 @@
 
 <style>
   .contact {
-    background: var(--secondary);
+    background: var(--brand-dark);
     color: #fff;
   }
 
@@ -117,7 +116,7 @@
     background: #fff;
     color: var(--ink);
     border-radius: 18px;
-    padding: 2rem;
+    padding: clamp(1.4rem, 4vw, 2.5rem);
     display: grid;
     gap: 1.1rem;
   }
@@ -154,6 +153,12 @@
 
   .form-submit {
     margin-top: 0.25rem;
+  }
+
+  .form-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
   }
 
   .form-status {
@@ -218,7 +223,7 @@
 
       if (result.success) {
         status.classList.add("ok");
-        status.textContent = "¡Gracias! Te contactaremos en menos de 24 h.";
+        status.textContent = "Gracias. Te contactaremos en menos de 24 h.";
         form.reset();
       } else {
         throw new Error(result.message || "Error al enviar");
